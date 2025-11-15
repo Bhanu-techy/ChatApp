@@ -1,8 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-// Import mock data
-const { users } = require("./mockData");
+const { sessions } = require("./mockData");
 
 const app = express();
 const PORT = 5000;
@@ -14,18 +13,29 @@ app.get("/", (req, res) => {
   res.send("Mock API running!");
 });
 
-app.get("/users", (req, res) => {
-  res.json(users);
+app.get("/sessions", (req, res) => {
+  const session=sessions.map(each =>({id:each.id, title: each.title}))
+  res.json(session);
 });
 
-app.get("/users/:id", (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (user) {
-    res.json(user);
+app.get("/session/:id", (req, res) => {
+  const session = sessions.find(u => u.id === parseInt(req.params.id));
+  if (session) {
+    res.json(session)
+    
   } else {
-    res.status(404).json({ error: "User not found" });
+    res.status(404).json({ error: "session not found" });
   }
 });
+
+app.get("/api/chat/:chatId", (req, res)=>{
+  const {chatId} = req.params
+  const chat = sessions.find(session =>
+  session.conversation.find(chat => chat.no === 11)
+);
+
+  res.json(chat)
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
