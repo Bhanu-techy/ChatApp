@@ -9,9 +9,6 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Mock API running!");
-});
 
 app.get("/sessions", (req, res) => {
   const session=sessions.map(each =>({id:each.id, title: each.title}))
@@ -31,9 +28,8 @@ app.get("/session/:id", (req, res) => {
 app.get("/api/chat/:chatId", (req, res)=>{
   const {chatId} = req.params
   const chat = sessions.find(session =>
-  session.conversation.find(chat => chat.no === 11)
+  session.conversation.find(chat => chat.no === parseInt(chatId))
 );
-
   res.json(chat)
 })
 
