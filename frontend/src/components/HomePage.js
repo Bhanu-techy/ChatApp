@@ -1,10 +1,9 @@
-import React from 'react'
-import Input from './ChatInput'
+import ChatInput from './ChatInput'
 
-function HomePage() {
+function HomePage({darkTheme}) {
   return (
-    <div className='w-3/4 flex justify-center items-center'>
-      <Input />
+    <div className={`w-3/4 h-[90vh] flex justify-center items-center `}>
+      <ChatInput hideh1={false}/>
     </div>
   )
 }

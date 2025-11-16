@@ -4,7 +4,7 @@ import TableResponse from './TableResponse'
 import ChatInput from './ChatInput'
 
 
-function ChatWindow() {
+function ChatWindow({darkTheme}) {
    
     const [question, setQuestion] = useState("")
     const [response, setResponse] = useState([])
@@ -36,17 +36,19 @@ function ChatWindow() {
 
 
   return (
-    <div className='w-3/4 h-full flex flex-col justify-center items-center p-5'>
+    <div className='w-3/4 h-full flex flex-col justify-between items-center p-5'>
         {response && 
         <div className='h-1/2 w-[90%] mb-auto flex flex-col justify-around'>
             <div className='m-2'>
             <h2 className='text-[28px]'>{data.question}</h2>
             <p>{data.answer}</p>
             </div>
+            <div className={`${darkTheme && 'text-gray-900'}`}>
             <TableResponse response={response}/>
-        </div>  
+            </div>
+        </div>
         }
-        <ChatInput onChangeInput={onChangeInput} value={question} onClickSearch={onClickSearch}/>
+        <ChatInput onChangeInput={onChangeInput} hideh1={response.length>0 ?true : false} value={question} onClickSearch={onClickSearch}/>
     </div>
   )
 }

@@ -38,6 +38,11 @@ app.post("/api/chat/:id", (req, res)=>{
   }
 })
 
+app.get("/api/new-chat", (req, res)=>{
+  const sessionId  = sessions.length+1
+  res.json({id:sessionId})
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
