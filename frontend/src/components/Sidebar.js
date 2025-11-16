@@ -14,8 +14,11 @@ function Sidebar() {
     },[])
 
   return (
-    <div className='w-1/4 bg-gray-300 h-full flex justify-center items-center'>
-        <ul className='flex flex-col justify-center items-cetnter w-full p-0 m-0 p-1'>
+    <div className='w-1/4 bg-gray-300 h-full flex flex-col h-full'>
+        <Link to="/">
+        <button className='border border-solid border-black h-[30px] rounded text-center w-[90%] m-1'>New chat</button>
+        </Link>
+        <ul className='flex flex-col justify-center items-cetnter w-full p-1 self-center mt-auto mb-auto'>
             {sessions.map(each => (
                 <Link key={each.id} to={`/chat/${each.id}`} className='m-1 w-[90%]'>
                 <li key={each.id} className='border border-solid border-black h-[30px] rounded text-center'>{each.title}</li>

@@ -1,8 +1,10 @@
 import {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import ChatInput from './ChatInput'
 
 function ChatWindow() {
     const [data, setData] = useState([])
+    const [question, setQuestion] = useState("")
 
     const {sessionId} = useParams()
 
@@ -15,19 +17,25 @@ function ChatWindow() {
         getSDetails()
     },[sessionId])
 
+    const onClickSearch= async () =>{
+        const url = `https://chatapp-tusz.onrender.com/api/session/chat/${sessionId}`
+        const options ={
+            method : "POST",
+            body: JSON.stringify(question)
+        }
+        const response = await fetch(url, options)
+        const ans= response.json()
+        console.log(ans)
+    }
+
+    const onChangeInput = (e) =>{
+        setQuestion(e.target.value)
+    }
+    console.log(question)
+
   return (
-    <div className='p-3 w-3/4'>
-        <ul className='flex flex-col'>
-            {data.map(each =>(
-                <li key={each.id}>
-                    <h3 className='text-right'>{each.question}</h3>
-                    <div className='bg-gray-300 p-2 m-2 rounded'>
-                        <p className=''>{each.answer}</p>
-                    </div>
-                    <hr className='bg-black-500 text-black-600 h-[5px]'/>
-                </li>
-            ))}
-        </ul>
+    <div className=' w-3/4'>
+        <ChatInput onChangeInput={onChangeInput}/>
     </div>
   )
 }
