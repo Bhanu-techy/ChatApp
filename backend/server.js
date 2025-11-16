@@ -29,8 +29,13 @@ app.post("/api/chat/:id", (req, res)=>{
   const {id} = req.params
   const {question} = req.body
   const session = sessions.find(u => u.id === parseInt(id));
-  const ans=session.conversation.filter(que => que.question.toLowerCase() === question.toLowerCase())
-  res.json(ans)
+  const answer=session.conversation.filter(que => que.question.toLowerCase() === question.toLowerCase())
+  if (answer) {
+    res.json(answer)
+    
+  } else {
+    res.status(404).json({ error: "question not found" });
+  }
 })
 
 app.listen(PORT, () => {
