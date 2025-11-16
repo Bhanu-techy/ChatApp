@@ -57,17 +57,24 @@ npm install express cors
 
 1. In `server.js`, set up Express and define the four required REST endpoints.
 
----------------------------------------------------------------------------------------------------
-| Route(Method)          | Description                                                            |
----------------------------------------------------------------------------------------------------
+
+| Route(Method)          | Description                                                             |
+| ---------------------- | ------------------------------------------------------------------------|
 | /api/sessions (GET)    | Returns a list of all mock session IDs/titles for the sidebar.          |
-----------------------------------------------------------------------------------------------------
 | /api/new-chat (GET)    | Returns a new, unique mock session ID.                                  |
-----------------------------------------------------------------------------------------------------
 | /api/session/:id (GET) | Returns the full mock conversation history for a given session ID.      |
-----------------------------------------------------------------------------------------------------
 |/api/chat/:id (POST)    |Accepts a user question and returns a mock structured (tabular) response.|
-----------------------------------------------------------------------------------------------------
+
+
+| Columns       | Type    |
+| ------------- | ------- |
+| district_id   | INTEGER |
+| district_name | TEXT    |
+| state_id      | INTEGER |
+| cases         | INTEGER |
+| cured         | INTEGER |
+| active        | INTEGER |
+| deaths        | INTEGER |
 
 ### Phase 2: Frontend Setup (React and Styling)
 
@@ -100,31 +107,32 @@ In `src/App.js`, use `BrowserRouter` and `Routes` to set up two main paths:
 
 ## Project Structure
 
-Organize your project files logically for easy navigation. Here's a typical structure for this React app:
+Organize your project files logically for easy navigation.
 
-/chat-app-project
-|
-├── /backend
-|   ├── node_modules/
-|   ├── server.js               <-- Express setup and routing
-|   ├── mockData.js             <-- All static JSON data
-|   ├── package.json
-|
-└── /frontend
-    ├── node_modules/
-    ├── package.json
-    ├── tailwind.config.js
-    └── /src
-        ├── /components
-        |   ├── Sidebar.js      <-- Collapsible session panel
-        |   ├── ThemeToggle.js  <-- Handles Light/Dark switching
-        |   ├── ChatInput.js    <-- Component for user text input
-        |   ├── TableResponse.js <-- Renders structured data beautifully
-        |   └── AnswerFeedback.js <-- Like/Dislike buttons
-        ├── App.js              <-- Main component and routing logic
-        ├── index.js            <-- Root file
-        └── index.css           <-- Base Tailwind CSS imports
-
+- **Chat-app-project/** (root folder)
+    -**backend/** : Backend folder.
+        -**node_modules/**: Auto-generated dependencies (don't edit).
+        -**server.js/**: Express setup and routing
+        -**mockData.js/**: All static JSON data
+        -**package.json/**: Lists dependencies and scripts.
+    -**frontend/** : Frontend folder.
+        - **node_modules/**: Auto-generated dependencies (don't edit).
+        - **public/**: Static files like index.html and favicon.
+        - **src/**: Main source code.
+            - **components/**: Reusable UI parts.
+                - Sidebar.js: Collapsible session panel
+        |       - ThemeToggle.js: Handles Light/Dark switching
+        |       - ChatInput.js: Component for user text input
+        |       - TableResponse.js: Renders structured data beautifully
+        |       - AnswerFeedback.js: Like/Dislike buttons
+            - **assets/**: Optional folder for images or styles.
+            - App.js: Main app component that ties everything together.
+            - index.js: Entry point for rendering the app.
+            - metadata.json: Sample JSON file for nodes and edges.
+            - App.css: Styles for the app layout.
+    - package.json: Lists dependencies and scripts.
+    - tailwind.config.js
+    - [README.md](http://readme.md/): Project documentation.
 
 This structure separates concerns: Components for UI, src for logic, and root for config.
 
